@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Song Playlist</title>
+</head>
+<body>
+    <h1>Songs</h1>
+    <ul>
+        {% for song in songs %}
+            <li>{{ song.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Playlists</h1>
+    <ul>
+        {% for playlist in playlists %}
+            <li>{{ playlist.name }}</li>
+            <ul>
+                {% for song in playlist.songs %}
+                    <li>{{ song.title }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+
+    <h2>Create Song</h2>
+    <form method="POST">
+        {{ song_form.csrf_token }}
+        {{ song_form.title.label }} {{ song_form.title }}
+        {{ song_form.submit }}
+    </form>
+
+    <h2>Create Playlist</h2>
+    <form method="POST">
+        {{ playlist_form.csrf_token }}
+        {{ playlist_form.name.label }} {{ playlist_form.name }}
+        {{ playlist_form.submit }}
+    </form>
+
+    <h2>Add Song to Playlist</h2>
+    <form method="POST">
+        {{ add_song_form.csrf_token }}
+        {{ add_song_form.playlist.label }} {{ add_song_form.playlist }}
+        {{ add_song_form.song.label }} {{ add_song_form.song }}
+        {{ add_song_form.submit }}
+    </form>
+</body>
+</html>
